@@ -7,7 +7,6 @@ async function run() {
     const fromBranch = core.getInput("FROM_BRANCH", { required: true });
     const toBranch = core.getInput("TO_BRANCH", { required: true });
     const githubToken = core.getInput("GITHUB_TOKEN", { required: true });
-    const requiredLabel = core.getInput("REQUIRED_LABEL", { required: true });
     const pullRequestTitle = core.getInput("PULL_REQUEST_TITLE");
     const pullRequestBody = core.getInput("PULL_REQUEST_BODY");
     const pullRequestIsDraft = core.getInput("PULL_REQUEST_IS_DRAFT").toLowerCase() === "true";
@@ -23,7 +22,7 @@ async function run() {
       repo: repository.name
     });
 
-    const newBranch = `${fromBranch}-dev`;
+    const newBranch = `${fromBranch}-${toBranch}`;
 
     // throws HttpError if branch already exists.
     try {
