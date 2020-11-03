@@ -25,6 +25,9 @@ inputs:
   PULL_REQUEST_IS_DRAFT:
     description: "Set to 'true' for the pull request to be opened as a draft. Default: 'false'"
     required: false
+  REVIEWERS:
+    description: "Reviewers to be assigned to the automatically created PR"
+    required: false
 outputs:
   PULL_REQUEST_URL:
     description: "URL for either the generated pull request or the currently open one"
