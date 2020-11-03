@@ -10,6 +10,7 @@ async function run() {
     const pullRequestTitle = core.getInput("PULL_REQUEST_TITLE");
     const pullRequestBody = core.getInput("PULL_REQUEST_BODY");
     const pullRequestIsDraft = core.getInput("PULL_REQUEST_IS_DRAFT").toLowerCase() === "true";
+    const prReviewers = core.getInput("REVIEWERS");
 
     const {
       payload: { repository }
@@ -87,6 +88,15 @@ async function run() {
         issue_number: pullRequest.number,
         assignees: context.payload.pull_request.user.login
       });
+
+      if ( toBranch === 'staging-ecs' ) {
+        await octokit.pulls.createReviewRequest({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          pull_number: pullRequest.number,
+          reviewers: prReviewers.split(','),
+        });
+      }
 
       console.log(
         `Pull request (${pullRequest.number}) successful! You can view it here: ${pullRequest.url}.`
