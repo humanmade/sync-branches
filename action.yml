@@ -16,6 +16,9 @@ inputs:
   TO_BRANCH:
     description: "Branch to make the pull-request against"
     required: true
+  NEW_BRANCH_SUFFIX:
+    description: "Suffix for the new branch. Default: 'dev'"
+    required: false
   PULL_REQUEST_TITLE:
     description: "What you would like as the title of the pull request. Default: 'sync: {FROM_BRANCH} to {TO_BRANCH}'"
     required: false

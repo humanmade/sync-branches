@@ -16,6 +16,12 @@ GitHub Action to sync one branch when another is updated.
 
 **Required** The branch you want to make the pull request to.
 
+### `NEW_BRANCH_SUFFIX`
+
+Suffix for the new branch.
+
+Default: `dev`
+
 ### `PULL_REQUEST_TITLE`
 
 What you would like as the title of the pull request.
