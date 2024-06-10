@@ -64,7 +64,8 @@ async function run() {
       const statusUrl = github.context.payload.pull_request.statuses_url;
       const sha = statusUrl.substring(statusUrl.lastIndexOf('/') + 1);
 
-      if(error.status === 404) {
+      // Error status is now a string, since June 10, 2024.
+      if(error.status === '404') {
         await octokit.git.createRef({
           owner: repository.owner.login,
           repo: repository.name,
@@ -72,6 +73,7 @@ async function run() {
           sha: sha
         })
       } else {
+        console.log(`Generic Error occured`, error);
         throw Error(error)
       }
     }
