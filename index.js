@@ -71,7 +71,7 @@ async function run() {
       console.log(`statusUrl: ${statusUrl}`);
       console.log(`sha: ${sha}`);
 
-      if(error.status === 404) {
+      if(error.status === '404') {
         const createRefResult = await octokit.git.createRef({
           owner: repository.owner.login,
           repo: repository.name,
