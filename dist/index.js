@@ -568,6 +568,9 @@ async function run() {
       const statusUrl = github.context.payload.pull_request.statuses_url;
       const sha = statusUrl.substring(statusUrl.lastIndexOf('/') + 1);
 
+      console.log(`Error Status: ${error.status}`);
+      console.log(`Creating new branch: ${newBranch}`);
+
       if(error.status === 404) {
         await octokit.git.createRef({
           owner: repository.owner.login,
