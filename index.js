@@ -56,7 +56,7 @@ async function run() {
           issue_number: context.payload.pull_request.number,
           body: `Sync has failed as branch \`${newBranch}\` already exists. Please delete the branch and restart the workflow.`,
         });
-        
+
         throw Error(`Sync has failed as branch \`${newBranch}\` already exists. Please delete the branch and restart the workflow.`);
       }
     } catch(error) {
@@ -121,6 +121,7 @@ async function run() {
       core.setOutput("PULL_REQUEST_NUMBER", currentPull.number.toString());
     }
   } catch (error) {
+    console.log(`Error: ${error}`);
     core.setFailed(error.message);
   }
 }
