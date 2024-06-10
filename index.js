@@ -43,6 +43,8 @@ async function run() {
 
     // throws HttpError if branch already exists.
     try {
+      console.log(`Checks if branch: ${newBranch} exists.`);
+
       const branch = await octokit.repos.getBranch({
         owner: repository.owner.login,
         repo: repository.name,
@@ -66,16 +68,20 @@ async function run() {
 
       console.log(`Error Status: ${error.status}`);
       console.log(`Creating new branch: ${newBranch}`);
+      console.log(`statusUrl: ${statusUrl}`);
+      console.log(`sha: ${sha}`);
 
       if(error.status === 404) {
-        await octokit.git.createRef({
+        const createRefResult = await octokit.git.createRef({
           owner: repository.owner.login,
           repo: repository.name,
           ref: `refs/heads/${newBranch}`,
           sha: sha
-        })
+        });
+        console.log(`New branch reated:`, createRefResult);
       } else {
-        throw Error(error)
+        console.log( 'Generic Error', error ); // eslint-disable-line no-console
+        throw Error(error);
       }
     }
 
