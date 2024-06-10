@@ -568,7 +568,7 @@ async function run() {
       const statusUrl = github.context.payload.pull_request.statuses_url;
       const sha = statusUrl.substring(statusUrl.lastIndexOf('/') + 1);
 
-      if(error.name === 'HttpError' && error.status === 404) {
+      if(error.status === 404) {
         await octokit.git.createRef({
           owner: repository.owner.login,
           repo: repository.name,
